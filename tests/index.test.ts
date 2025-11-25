@@ -187,6 +187,14 @@ test('Support for converting and decoding GEOJSON with Z coordinates to GEOJSON 
   );
 });
 
+test('Support for converting and decoding shapes with Z coordinates to 2D WKT -- GEOMETRY COLLECTION', () => {
+  const json = parseFromWK(
+    convertWkTo2DWk(convertToWK(testGeometryCollectionWithZ)),
+  ) as GeometryCollection<Polygon>;
+
+  expect(json.geometries[0].coordinates[0][0].length).toEqual(2);
+});
+
 test('Support for converting and decoding GEOJSON with Z coordinates to GEOJSON 2D -- GEOMETRY COLLECTION', () => {
   const item = convertZGeojsonTo2D(
     testGeometryCollectionWithZ,
